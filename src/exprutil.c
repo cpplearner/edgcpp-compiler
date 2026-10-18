@@ -18105,8 +18105,7 @@ reference entry, or is NULL if none is needed.
                                                     routine->assoc_template)) {
           could_be_instantiated = TRUE;
         }  /* if */
-      } else if (routine_sym->variant.routine.ptr
-                            ->friend_defined_in_instantiation) {
+      } else if (routine->friend_defined_in_instantiation) {
         could_be_instantiated = TRUE;
       }  /* if */
       if (!could_be_instantiated) {
