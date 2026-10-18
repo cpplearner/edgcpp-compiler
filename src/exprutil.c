@@ -18088,9 +18088,7 @@ reference entry, or is NULL if none is needed.
     } else if (routine->has_deducible_return_type &&
                !routine->has_deduced_return_type &&
                !routine->is_prototype_instantiation &&
-               !routine->defined &&
-               !has_pending_template_definition_from_module(
-                   routine->assoc_template)) {
+               !routine->defined) {
       /* A function with a deducible return type that has not (yet) been
          deduced.  If we are in a context where diagnostics are suppressed,
          treat the absence of a definition as a (suppressed) expression
@@ -18102,6 +18100,9 @@ reference entry, or is NULL if none is needed.
         a_symbol_ptr  tsym;
         tsym = prototype_template_if_template_symbol(tip->template_sym);
         if (tsym->defined) {
+          could_be_instantiated = TRUE;
+        } else if (has_pending_template_definition_from_module(
+                                                    routine->assoc_template)) {
           could_be_instantiated = TRUE;
         }  /* if */
       } else if (routine_sym->variant.routine.ptr
